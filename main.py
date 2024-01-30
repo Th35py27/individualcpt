@@ -16,6 +16,8 @@ from api.player import player_api
 from model.users import initUsers
 from model.players import initPlayers
 
+from api.login import hello_api
+
 # setup App pages
 from projects.projects import app_projects # Blueprint directory import projects definition
 
@@ -26,7 +28,8 @@ db.init_app(app)
 # register URIs
 app.register_blueprint(user_api) # register api routes
 app.register_blueprint(player_api)
-app.register_blueprint(app_projects) # register app pages
+app.register_blueprint(app_projects)
+app.register_blueprint(hello_api)# register app pages
 
 @app.errorhandler(404)  # catch for URL not found
 def page_not_found(e):
@@ -40,6 +43,29 @@ def index():
 @app.route('/table/')  # connects /stub/ URL to stub() function
 def table():
     return render_template("table.html")
+
+@app.route('/login/')  
+def login():
+    return render_template("login.html")
+
+@app.route('/welcome/')  
+def welcome():
+    return render_template("welcome.html")
+
+@app.route('/signup/')  
+def signup():
+    return render_template("signup.html")
+
+@app.route('/delete/')  
+def delete():
+    return render_template("delete.html")
+
+@app.route('/changepassword/')  
+def changepassword():
+    return render_template("changepwd.html")
+
+
+
 
 @app.before_request
 def before_request():
